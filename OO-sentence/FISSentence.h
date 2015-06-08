@@ -13,9 +13,7 @@
 @property (strong, nonatomic) NSMutableArray *words;
 
 -(NSString *)stringFormat;
-
--(NSUInteger)numOfWords;
-
+-(NSNumber *)numOfWords;
 -(BOOL)containsWord:(NSString *)searchTerm;
 
 -(NSArray *)words;

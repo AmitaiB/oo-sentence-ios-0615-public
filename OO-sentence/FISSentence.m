@@ -23,8 +23,8 @@
 }
 
 //Write a method called numOfWords that returns the number of words in the sentence.
--(NSUInteger)numOfWords {
-    return [self.words count];
+-(NSNumber *)numOfWords {
+    return [NSNumber numberWithInteger: [self.words count]];
 }
 
 //Write a method called containsWord: that takes an NSString to search for, and returns a YES or NO if that word is in the sentence.
@@ -41,14 +41,12 @@
 //Write a method called isProperSentence that ensures that the first word is capitalized and the last word as a punctuation mark.
 -(BOOL)isProperSentence {
     NSCharacterSet *punctuationMark = [NSCharacterSet punctuationCharacterSet];
-//    is the last char in the punctcharset?
-    
-//    NSPredicate *endsWithPunctuationMark = [NSPredicate predicateWithFormat: @"%@", punctuationMark];
+
+//   Is the last charachter in the punctuationCharacterSet (or not)?
     NSString *lastWord = [self.words lastObject];
     BOOL endsWithPunctuationMark = [punctuationMark characterIsMember: [lastWord characterAtIndex:[lastWord length] -1]];
 
-//    ;             componentsSeparatedByString:@""] lastObject] ;
-
+//    Is the first letter of the first word capitalized (or not)?
     BOOL isSentenceCase = [[[self.words firstObject] capitalizedString] isEqualToString:[self.words firstObject]];
     
     if (isSentenceCase && endsWithPunctuationMark) {
