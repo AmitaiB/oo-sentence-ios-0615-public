@@ -21,7 +21,6 @@
 -(BOOL)isProperSentence;
 
 -(BOOL)isEqualToSentence:(FISSentence *)otherSentence;
-
 -(NSString *)punctuationFilter:(NSString *)inputString;
 
 @end
