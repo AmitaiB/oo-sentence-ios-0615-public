@@ -59,15 +59,24 @@
 
 //Write a method called isEqualToSentence that takes in another FISSentence object and returns a YES or NO if the sentences are the same. Be a bit loose with that definition. If the capitalization or punctuation is a bit different that is fine.
 -(BOOL)isEqualToSentence:(FISSentence *)otherSentence {
-    NSString *thisSentence = [self punctuationFilter:[self stringFormat]];
-    NSString *theOtherSentence = [self punctuationFilter:[otherSentence stringFormat]];
+    NSMutableString *thisSentence = [[self punctuationFilter:[self stringFormat]] mutableCopy];
+    NSMutableString *theOtherSentence = [[self punctuationFilter:[otherSentence stringFormat]] mutableCopy];
     NSLog(@"thisSentence:\n%@\n\ntheOtherSentence:\n%@", thisSentence, theOtherSentence);
-    return [[thisSentence lowercaseString] isEqualToString: [theOtherSentence lowercaseString]];
+    thisSentence = [thisSentence lowercaseString];
+    theOtherSentence = [theOtherSentence lowercaseString];
+    NSLog(@"A Second-ah Time-ah:\n\nthisSentence:\n%@\n\ntheOtherSentence:\n%@", thisSentence, theOtherSentence);
+
+    return [thisSentence isEqualToString:theOtherSentence];
 }
 
 -(NSString *)punctuationFilter:(NSString *)inputString {
-    NSMutableString *outputString = [[inputString componentsSeparatedByCharactersInSet:[NSCharacterSet punctuationCharacterSet]] mutableCopy];
-    outputString = [[outputString description] mutableCopy];
+    NSMutableArray *outputArray = [[inputString componentsSeparatedByCharactersInSet:[NSCharacterSet punctuationCharacterSet]] mutableCopy];
+    for (NSUInteger i = [outputArray count] -1; i >= 0; i--) {
+        if ([outputArray[i] isEqualToString:@""]) {
+            [outputArray removeObject:outputArray[i]];
+        }
+    }
+    NSMutableArray *outputString = [[outputArray description] mutableCopy];
     return [outputString copy];
 }
 
