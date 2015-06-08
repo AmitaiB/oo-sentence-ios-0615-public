@@ -61,6 +61,7 @@
 -(BOOL)isEqualToSentence:(FISSentence *)otherSentence {
     NSString *thisSentence = [self punctuationFilter:[self stringFormat]];
     NSString *theOtherSentence = [self punctuationFilter:[otherSentence stringFormat]];
+    NSLog(@"thisSentence:\n%@\n\ntheOtherSentence:\n%@", thisSentence, theOtherSentence);
     return [[thisSentence lowercaseString] isEqualToString: [theOtherSentence lowercaseString]];
 }
 
