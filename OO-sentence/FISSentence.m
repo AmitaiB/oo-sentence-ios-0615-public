@@ -59,19 +59,15 @@
 
 //Write a method called isEqualToSentence that takes in another FISSentence object and returns a YES or NO if the sentences are the same. Be a bit loose with that definition. If the capitalization or punctuation is a bit different that is fine.
 -(BOOL)isEqualToSentence:(FISSentence *)otherSentence {
-    NSMutableString *thisSentence = [self.stringFormat mutableCopy];
-    NSMutableString *theOtherSentence = [otherSentence.stringFormat mutableCopy];
-    
-    
-    
-    thisSentence
-    
-    
+    NSString *thisSentence = [self punctuationFilter:[self stringFormat]];
+    NSString *theOtherSentence = [self punctuationFilter:[otherSentence stringFormat]];
     return [[self.stringFormat lowercaseString] isEqualToString: [otherSentence.stringFormat lowercaseString]];
 }
 
--(NSString *)punctuationFilter:(NSMutableString *)inputString {
-    
+-(NSString *)punctuationFilter:(NSString *)inputString {
+    NSMutableString *outputString = [[inputString componentsSeparatedByCharactersInSet:[NSCharacterSet punctuationCharacterSet]] mutableCopy];
+    outputString = [[outputString description] mutableCopy];
+    return [outputString copy];
 }
 
 
