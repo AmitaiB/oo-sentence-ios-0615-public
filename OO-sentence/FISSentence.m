@@ -14,23 +14,49 @@
 //@property (strong, nonatomic) NSMutableArray *theSentence;
 
 //Write a method called stringFormat that returns an NSString that is the full sentence.
--(NSString *)stringFormat;
+-(NSString *)stringFormat {
+    return [self.theSentence componentsJoinedByString:@" "];
+}
 
 //Write a method called numOfWords that returns the number of words in the sentence.
--(NSUInteger)numOfWords;
+-(NSUInteger)numOfWords {
+    return [self.theSentence count];
+}
 
 //Write a method called containsWord: that takes an NSString to search for, and returns a YES or NO if that word is in the sentence.
--(BOOL)containsWord:(NSString *)searchTerm;
+-(BOOL)containsWord:(NSString *)searchTerm {
+    return [self.theSentence containsObject:searchTerm];
+}
 
 //Write an accessor method called words that returns the instance variable containing all the words.
--(NSArray *)words;
+-(NSArray *)words {
+    return [self.theSentence copy];
+}
 
 //EXTRA CREDIT
 //Write a method called isProperSentence that ensures that the first word is capitalized and the last word as a punctuation mark.
--(BOOL)isProperSentence;
+-(BOOL)isProperSentence {
+    NSCharacterSet *punctuationMark = [NSCharacterSet punctuationCharacterSet];
+//    is the last char in the punctcharset?
+    
+//    NSPredicate *endsWithPunctuationMark = [NSPredicate predicateWithFormat: @"%@", punctuationMark];
+    NSString *lastWord = [self.theSentence lastObject];
+    BOOL endsWithPunctuationMark = [punctuationMark characterIsMember: [lastWord characterAtIndex:[lastWord length] -1]];
+
+//    ;             componentsSeparatedByString:@""] lastObject] ;
+
+    BOOL isSentenceCase = [[[self.theSentence firstObject] capitalizedString] isEqualToString:[self.theSentence firstObject]];
+    
+    if (isSentenceCase && endsWithPunctuationMark) {
+        return YES;
+    }
+    return NO;
+}
 
 //Write a method called isEqualToSentence that takes in another FISSentence object and returns a YES or NO if the sentences are the same. Be a bit loose with that definition. If the capitalization or punctuation is a bit different that is fine.
--(BOOL)isEqualToSentence:(FISSentence *)otherSentence;
+-(BOOL)isEqualToSentence:(FISSentence *)otherSentence {
+    return [self.stringFormat isEqualToString:otherSentence.stringFormat];
+}
 
 
 
