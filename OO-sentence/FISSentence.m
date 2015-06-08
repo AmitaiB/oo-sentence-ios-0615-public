@@ -15,22 +15,22 @@
 
 //Write a method called stringFormat that returns an NSString that is the full sentence.
 -(NSString *)stringFormat {
-    return [self.theSentence componentsJoinedByString:@" "];
+    return [self.words componentsJoinedByString:@" "];
 }
 
 //Write a method called numOfWords that returns the number of words in the sentence.
 -(NSUInteger)numOfWords {
-    return [self.theSentence count];
+    return [self.words count];
 }
 
 //Write a method called containsWord: that takes an NSString to search for, and returns a YES or NO if that word is in the sentence.
 -(BOOL)containsWord:(NSString *)searchTerm {
-    return [self.theSentence containsObject:searchTerm];
+    return [self.words containsObject:searchTerm];
 }
 
 //Write an accessor method called words that returns the instance variable containing all the words.
 -(NSArray *)words {
-    return [self.theSentence copy];
+    return [self.words copy];
 }
 
 //EXTRA CREDIT
@@ -40,12 +40,12 @@
 //    is the last char in the punctcharset?
     
 //    NSPredicate *endsWithPunctuationMark = [NSPredicate predicateWithFormat: @"%@", punctuationMark];
-    NSString *lastWord = [self.theSentence lastObject];
+    NSString *lastWord = [self.words lastObject];
     BOOL endsWithPunctuationMark = [punctuationMark characterIsMember: [lastWord characterAtIndex:[lastWord length] -1]];
 
 //    ;             componentsSeparatedByString:@""] lastObject] ;
 
-    BOOL isSentenceCase = [[[self.theSentence firstObject] capitalizedString] isEqualToString:[self.theSentence firstObject]];
+    BOOL isSentenceCase = [[[self.words firstObject] capitalizedString] isEqualToString:[self.words firstObject]];
     
     if (isSentenceCase && endsWithPunctuationMark) {
         return YES;

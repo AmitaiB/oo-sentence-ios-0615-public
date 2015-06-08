@@ -10,7 +10,7 @@
 
 @interface FISSentence : NSObject
 
-@property (strong, nonatomic) NSMutableArray *theSentence;
+@property (strong, nonatomic) NSMutableArray *words;
 
 -(NSString *)stringFormat;
 
