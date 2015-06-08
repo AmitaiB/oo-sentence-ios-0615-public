@@ -13,24 +13,28 @@
 //We are going to represent our sentence as an NSArray of NSStrings. So to represent the sentence "How are you?" we would have an array like this @[@"How", @"are", @"you?"]. To do this we will need to hold state in our object. This means an instance variable! Create a NSMutableArray instance variable to hold your words.
 //@property (strong, nonatomic) NSMutableArray *theSentence;
 
+//-(void)setWords:(NSString *)inputString {
+//    _words = [[inputString componentsSeparatedByString:@" "] mutableCopy];
+//}
+
 //Write a method called stringFormat that returns an NSString that is the full sentence.
 -(NSString *)stringFormat {
-    return [self.theSentence componentsJoinedByString:@" "];
+    return [self.words componentsJoinedByString:@" "];
 }
 
 //Write a method called numOfWords that returns the number of words in the sentence.
 -(NSUInteger)numOfWords {
-    return [self.theSentence count];
+    return [self.words count];
 }
 
 //Write a method called containsWord: that takes an NSString to search for, and returns a YES or NO if that word is in the sentence.
 -(BOOL)containsWord:(NSString *)searchTerm {
-    return [self.theSentence containsObject:searchTerm];
+    return [self.words containsObject:searchTerm];
 }
 
 //Write an accessor method called words that returns the instance variable containing all the words.
 -(NSArray *)words {
-    return [self.theSentence copy];
+    return [_words copy];
 }
 
 //EXTRA CREDIT
@@ -40,12 +44,12 @@
 //    is the last char in the punctcharset?
     
 //    NSPredicate *endsWithPunctuationMark = [NSPredicate predicateWithFormat: @"%@", punctuationMark];
-    NSString *lastWord = [self.theSentence lastObject];
+    NSString *lastWord = [self.words lastObject];
     BOOL endsWithPunctuationMark = [punctuationMark characterIsMember: [lastWord characterAtIndex:[lastWord length] -1]];
 
 //    ;             componentsSeparatedByString:@""] lastObject] ;
 
-    BOOL isSentenceCase = [[[self.theSentence firstObject] capitalizedString] isEqualToString:[self.theSentence firstObject]];
+    BOOL isSentenceCase = [[[self.words firstObject] capitalizedString] isEqualToString:[self.words firstObject]];
     
     if (isSentenceCase && endsWithPunctuationMark) {
         return YES;
@@ -55,7 +59,7 @@
 
 //Write a method called isEqualToSentence that takes in another FISSentence object and returns a YES or NO if the sentences are the same. Be a bit loose with that definition. If the capitalization or punctuation is a bit different that is fine.
 -(BOOL)isEqualToSentence:(FISSentence *)otherSentence {
-    return [self.stringFormat isEqualToString:otherSentence.stringFormat];
+    return [[self.stringFormat lowercaseString] isEqualToString: [otherSentence.stringFormat lowercaseString]];
 }
 
 
